@@ -1,6 +1,5 @@
 package com.behl.emulator.configuration;
 
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -35,9 +34,9 @@ public class AwsS3Configuration {
 
 	@Bean
 	@Profile(value = "local")
-	public AmazonS3 localAmazonS3(@Value("${com.behl.aws.s3.endpoint}") final String s3Endpoint) {
-		var endpointConfiguration = new AwsClientBuilder.EndpointConfiguration(s3Endpoint,
-				Regions.AP_SOUTH_1.getName());
+	public AmazonS3 localAmazonS3() {
+		var endpointConfiguration = new AwsClientBuilder.EndpointConfiguration(
+				awsConfigurationProperties.getS3().getEndpoint(), Regions.AP_SOUTH_1.getName());
 		var awsCredentials = new BasicAWSCredentials(awsConfigurationProperties.getAccessKey(),
 				awsConfigurationProperties.getSecretAccessKey());
 		return AmazonS3ClientBuilder.standard().withEndpointConfiguration(endpointConfiguration)

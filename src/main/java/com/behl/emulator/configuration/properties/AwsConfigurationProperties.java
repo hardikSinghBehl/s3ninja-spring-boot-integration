@@ -15,6 +15,7 @@ public class AwsConfigurationProperties {
 	@Data
 	public class S3 {
 		private String bucketName;
+		private String endpoint;
 	}
 
 }
