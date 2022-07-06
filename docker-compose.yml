@@ -18,7 +18,7 @@ services:
     depends_on:
       - s3-ninja
     environment:
-      S3_NINJA_ENDPOINT: s3-ninja:9000
+      S3_NINJA_ENDPOINT: http://s3-ninja:9000
     networks:
       - s3-ninja-spring-boot-integration-network
 
