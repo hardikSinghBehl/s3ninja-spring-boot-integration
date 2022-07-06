@@ -1,0 +1,26 @@
+version: '3.7'
+services:
+  s3-ninja:
+    image: scireum/s3-ninja:latest
+    volumes:
+      - ./data:/home/sirius/data
+    ports:
+    - 9000:9000
+    networks:
+      - s3-ninja-spring-boot-integration-network
+      
+  backend-service:
+    build:
+      context: ./
+      dockerfile: Dockerfile
+    ports:
+    - 8080:8080
+    depends_on:
+      - s3-ninja
+    environment:
+      S3_NINJA_ENDPOINT: http://s3-ninja:9000
+    networks:
+      - s3-ninja-spring-boot-integration-network
+
+networks:
+  s3-ninja-spring-boot-integration-network:

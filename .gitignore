@@ -31,3 +31,9 @@ build/
 
 ### VS Code ###
 .vscode/
+
+### MAC ###
+.DS_Store
+
+### S3Ninja Mounted folder ###
+data/
